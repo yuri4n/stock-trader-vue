@@ -1,10 +1,26 @@
 <template>
-  <h1>stocks/Stocks</h1>
+  <v-row>
+    <app-stock
+      v-for="stock in stocks"
+      :key="stock.id"
+      :stock="stock"
+    ></app-stock>
+  </v-row>
 </template>
 
 <script>
+import Stock from "./Stock";
+
 export default {
-  name: "Stocks"
+  name: "Stocks",
+  components: {
+    appStock: Stock
+  },
+  computed: {
+    stocks() {
+      return this.$store.getters.stocks;
+    }
+  }
 };
 </script>
 

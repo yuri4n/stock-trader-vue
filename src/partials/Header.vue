@@ -4,7 +4,14 @@
     <v-toolbar-title>Stock Market</v-toolbar-title>
     <v-spacer></v-spacer>
     <div class="font-weight-bold mr-2">Balance:</div>
-    <div class="mr-10">$12.3</div>
+    <div class="mr-10">{{ `$${funds}` }}</div>
+    <router-link
+      :style="{ cursor: 'pointer' }"
+      tag="div"
+      to="/"
+      class="font-weight-bold mr-10 red--text"
+      >END DAY</router-link
+    >
   </v-app-bar>
 </template>
 
@@ -18,6 +25,11 @@ export default {
     changeDrawer() {
       this.drawer = !this.drawer;
       this.$emit("change-drawer", this.drawer);
+    }
+  },
+  computed: {
+    funds() {
+      return this.$store.getters.funds;
     }
   }
 };

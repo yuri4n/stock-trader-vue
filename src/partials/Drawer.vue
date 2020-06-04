@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer :value="value" @input="changeValue" app clipped>
     <v-list dense>
-      <v-list-item to="/" link>
+      <v-list-item to="/home" link>
         <v-list-item-action>
           <v-icon>mdi-home-variant-outline</v-icon>
         </v-list-item-action>

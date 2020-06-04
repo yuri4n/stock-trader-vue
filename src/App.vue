@@ -28,6 +28,7 @@ export default {
   },
   created() {
     this.$vuetify.theme.dark = true;
+    this.$store.dispatch("initStocks");
   },
   data: () => ({
     drawer: null
