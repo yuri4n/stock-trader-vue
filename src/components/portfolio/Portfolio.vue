@@ -5,7 +5,7 @@
       :key="stock.id"
       :stock="stock"
     ></app-stock>
-    <h1 class="display-2" v-if="stocks.length === 0">
+    <h1 class="display-1" v-if="stocks.length === 0">
       There are no stocks, try
       <router-link
         to="/stocks"

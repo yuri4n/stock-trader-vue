@@ -4,27 +4,29 @@
     <v-toolbar-title>Stock Market</v-toolbar-title>
     <v-spacer></v-spacer>
     <div class="font-weight-bold mr-2">Balance:</div>
-    <div class="mr-10">{{ `$${funds}` }}</div>
-    <router-link
-      :style="{ cursor: 'pointer' }"
-      tag="div"
-      to="/"
-      class="font-weight-bold mr-10 red--text"
-      >END DAY</router-link
-    >
+    <div class="mr-10">{{ funds | currency }}</div>
+    <button class="font-weight-bold mr-10 red--text" @click="endDay">
+      END DAY
+    </button>
   </v-app-bar>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "Header",
   data: () => ({
     drawer: true
   }),
   methods: {
+    ...mapActions(["randomizeStocks"]),
     changeDrawer() {
       this.drawer = !this.drawer;
       this.$emit("change-drawer", this.drawer);
+    },
+    endDay() {
+      this.randomizeStocks();
     }
   },
   computed: {

@@ -8,7 +8,7 @@
           </v-list-item-title>
           <v-list-item-subtitle>
             <span class="font-weight-bold">Price: </span>
-            {{ `$${stock.price}` }}
+            {{ stock.price | currency }}
           </v-list-item-subtitle>
           <v-text-field
             min="0"
@@ -20,8 +20,12 @@
       </v-list-item>
 
       <v-card-actions>
-        <v-btn text @click="buyStock" color="warning" :disabled="disableButton"
-          >Buy</v-btn
+        <v-btn
+          text
+          @click="buyStock"
+          color="warning"
+          :disabled="disableButton"
+          >{{ insufficientFunds ? "Insufficient Funds" : "Buy" }}</v-btn
         >
       </v-card-actions>
     </v-card>
@@ -57,11 +61,18 @@ export default {
     }
   },
   computed: {
+    funds() {
+      return this.$store.getters.funds;
+    },
     disableButton() {
       return (
         parseInt(this.quantity) === 0 ||
-        !Number.isInteger(parseFloat(this.quantity))
+        !Number.isInteger(parseFloat(this.quantity)) ||
+        this.insufficientFunds
       );
+    },
+    insufficientFunds() {
+      return this.quantity * this.stock.price > this.funds;
     }
   }
 };

@@ -20,26 +20,30 @@
       >your portfolio
     </h2>
     <h2 class="font-weight-light mb-10">
-      <router-link
-        to="/stocks"
-        tag="span"
-        class="font-weight-black red--text"
-        style="cursor: pointer; text-decoration: underline"
-        >END DAY</router-link
-      >
+      <button @click="endDay" class="font-weight-black red--text">
+        END DAY
+      </button>
     </h2>
     <h2 class="font-weight-light">
-      Your founds: <span class="display-1">{{ `$${funds}` }}</span>
+      Your founds: <span class="display-1">{{ funds | currency }}</span>
     </h2>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "Home",
   computed: {
     funds() {
       return this.$store.getters.funds;
+    }
+  },
+  methods: {
+    ...mapActions(["randomizeStocks"]),
+    endDay() {
+      this.randomizeStocks();
     }
   }
 };
